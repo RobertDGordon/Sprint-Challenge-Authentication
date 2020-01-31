@@ -52,12 +52,19 @@ describe('server', function() {
         beforeEach(async () => {
             await db('users').truncate();
         })
-        it('should return 201 and username', function() {
+        it('should return 201', function() {
             return request(server)
                 .post('/api/auth/register')
                 .send({ username: 'TestRegister', password: 'testing', type: 'admin'})
                 .then(res=>{
                     expect(res.status).toBe(201);
+                })
+        })
+        it('should return username', function() {
+            return request(server)
+                .post('/api/auth/register')
+                .send({ username: 'TestRegister', password: 'testing', type: 'admin'})
+                .then(res=>{
                     expect(res.body.username).toEqual('TestRegister')
                 })
         })
@@ -89,26 +96,42 @@ describe('server', function() {
         })
     })
     describe('GET /api/users', function() {
-        it('should return list of users', function() {
+        it('should return 200 ok', function() {
             return request(server)
                 .get('/api/users')
                 .set('Authorization', token)
                 .set('Cookie', [cookies])
                 .then(res=>{
                     expect(res.status).toBe(200);
+                })
+        })
+        it('should return list of users', function() {
+            return request(server)
+                .get('/api/users')
+                .set('Authorization', token)
+                .set('Cookie', [cookies])
+                .then(res=>{
                     expect(res.body).toBeDefined()
                     console.log('should return list of users:', res.body)
                 })
         })
     })
     describe('GET /api/jokes', function() {
-        it('should return 200 and list of jokes', function() {
+        it('should return 200', function() {
             return request(server)
                 .get('/api/jokes')
                 .set('Authorization', token)
                 .set('Cookie', [cookies])
                 .then(res=>{
                     expect(res.status).toBe(200);
+                })
+        })
+        it('should return list of jokes', function() {
+            return request(server)
+                .get('/api/jokes')
+                .set('Authorization', token)
+                .set('Cookie', [cookies])
+                .then(res=>{
                     expect(res.body).toBeDefined()
                     // console.log(res.body)
                 })
