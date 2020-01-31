@@ -61,17 +61,11 @@ const SearchBar = styled.section`
 
 const UserCards = styled.section`
   display: flex;
-  /* flex-direction: column-reverse; */
   flex-wrap: wrap;
   width: 100vw;
   justify-content: center;
   align-items: center;
-  /* height: 650px; */
-  /* margin-top: 130px; */
-  /* position: absolute; */
-  /* bottom: 200px; */
   z-index: 1;
-  /* border: 1px solid blue; */
 `
 
 function Users(props) {
@@ -97,7 +91,7 @@ function Users(props) {
 
   return (
     <Main>
-      <SearchBar>
+      {/* <SearchBar>
         <form onSubmit={event => handleSubmit(event)}>
           <label>
             Project Id:
@@ -105,7 +99,7 @@ function Users(props) {
           </label>
           <button>Stack 'em</button>
         </form>
-      </SearchBar>
+      </SearchBar> */}
       <UserCards>
       {projects.map ((user, index) =>
         <Card key={user.id} index={index} {...user}/>

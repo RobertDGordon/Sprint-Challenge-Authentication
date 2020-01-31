@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import { CardDiv } from './Card.styled';
 
 const Card = (props) => {
-    console.log('card props:', props.index)
+    // console.log('card props:', props.index)
     return(
         <>
-        <Link to={`/project/${props.index}`}>
+        {/* <Link to={`/project/${props.index}`}> */}
         <CardDiv id={props.id}>
             <p>{props.joke}</p>
         </CardDiv>
-        </Link>
+        {/* </Link> */}
         </>
     )
 }
