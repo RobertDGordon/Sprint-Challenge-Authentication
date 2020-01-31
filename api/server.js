@@ -1,18 +1,22 @@
 const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
+const configMiddleware = require('../middleware/config.js');
 
-const authenticate = require('../auth/authenticate-middleware.js');
+const verifyToken = require('../middleware/token.js')
+const verifySession = require('../middleware/session.js');
 const authRouter = require('../auth/auth-router.js');
+const usersRouter = require('../users/users-router.js');
 const jokesRouter = require('../jokes/jokes-router.js');
 
 const server = express();
 
-server.use(helmet());
-server.use(cors());
-server.use(express.json());
+configMiddleware(server);
 
 server.use('/api/auth', authRouter);
-server.use('/api/jokes', authenticate, jokesRouter);
+server.use('/api/users', verifyToken, verifySession, usersRouter);
+server.use('/api/jokes', verifyToken, verifySession, jokesRouter);
+
+server.get('/', (req, res) => {
+    res.send("It's alive!");
+  });
 
 module.exports = server;
