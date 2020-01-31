@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Head = styled.header`
@@ -10,6 +11,13 @@ const Head = styled.header`
     color: white;
     nav{
       display: flex;
+      a{
+        color: white;
+        margin: 15px;
+        &:hover{
+          color: blue;
+        }
+      }
     }
 `
 
@@ -19,9 +27,15 @@ function Home(props) {
       <Head>
         <h1>Node API Challenge</h1>
         <nav>
-          <button onClick={()=> props.history.push('/login')}>Register</button>
-          <button onClick={()=> props.history.push('/login')}>Login</button>
-          <button onClick={()=> props.history.push('/projects')}>Show me the jokes!</button>
+        <Link to="/register">
+            Register
+        </Link>
+        <Link to="/login">
+            Login
+        </Link>
+        <Link to="/jokes">
+            Jokes
+        </Link>
         </nav>
       </Head>
   );

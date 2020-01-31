@@ -32,7 +32,7 @@ function App() {
       <Main>
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
-        <PrivateRoute path='/projects' component={Projects} />
+        <PrivateRoute path='/jokes' component={Projects} />
         {/* <Route path ='/project/:id' render={props => {
           return <Project {...props} projects={projects} />}} /> */}
       </Main>

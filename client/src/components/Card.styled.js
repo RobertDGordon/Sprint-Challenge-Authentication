@@ -19,7 +19,7 @@ export const CardDiv = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: -130px;
+    /* margin-top: -130px; */
     padding: 0 15px;
     width: 240px;
     height: 216px;

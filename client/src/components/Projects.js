@@ -12,16 +12,16 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   margin: 0 auto;
-  position: relative;
+  /* position: relative; */
   /* border: 1px solid blue; */
   #plate{
-      position: absolute;
-      bottom: 175px;
+      /* position: absolute; */
+      /* bottom: 175px; */
       z-index: 0;
   }
 `
@@ -61,15 +61,15 @@ const SearchBar = styled.section`
 
 const UserCards = styled.section`
   display: flex;
-  flex-direction: column-reverse;
+  /* flex-direction: column-reverse; */
   flex-wrap: wrap;
-  width: 100%;
+  width: 100vw;
   justify-content: center;
   align-items: center;
-  max-height: 650px;
-  margin-top: 130px;
-  position: absolute;
-  bottom: 200px;
+  /* height: 650px; */
+  /* margin-top: 130px; */
+  /* position: absolute; */
+  /* bottom: 200px; */
   z-index: 1;
   /* border: 1px solid blue; */
 `
@@ -106,9 +106,6 @@ function Users(props) {
           <button>Stack 'em</button>
         </form>
       </SearchBar>
-      <div id='plate'>
-        <img src='../img/plate.png' alt='plate'/>
-      </div>
       <UserCards>
       {projects.map ((user, index) =>
         <Card key={user.id} index={index} {...user}/>
