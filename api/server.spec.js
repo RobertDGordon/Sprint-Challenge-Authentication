@@ -52,13 +52,41 @@ describe('server', function() {
         beforeEach(async () => {
             await db('users').truncate();
         })
-        it('should return 201 ok', function() {
+        it('should return 201 and username', function() {
             return request(server)
                 .post('/api/auth/register')
                 .send({ username: 'TestRegister', password: 'testing', type: 'admin'})
                 .then(res=>{
                     expect(res.status).toBe(201);
                     expect(res.body.username).toEqual('TestRegister')
+                })
+        })
+    })
+    let cookies;
+
+    describe('POST /api/auth/login', function() {
+        // beforeEach(async () => {
+        //     await db('users').truncate();
+        // })
+        it('should return 201 ok', function() {
+            return request(server)
+                .post('/api/auth/login')
+                .send({ username: 'TestRegister', password: 'testing', type: 'admin'})
+                .then(res=>{
+                    expect(res.status).toBe(201);
+                })
+        })
+        it('should return token, cookie, user data', function() {
+            return request(server)
+                .post('/api/auth/login')
+                .send({ username: 'TestRegister', password: 'testing', type: 'admin'})
+                .then(res=>{
+                    expect(res.body.username).toEqual('TestRegister')
+                    expect(res.body.token).toBeDefined()
+                    expect(res.headers).toHaveProperty("set-cookie");
+                    cookies = res.headers["set-cookie"].pop().split(";")[0];
+                    console.log('cookies:',cookies)
+                    // console.log(res.headers)
                 })
         })
     })
