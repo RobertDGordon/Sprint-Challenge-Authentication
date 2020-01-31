@@ -48,4 +48,18 @@ describe('server', function() {
             })
         })
     })
+    describe('POST /api/auth/register', function() {
+        beforeEach(async () => {
+            await db('users').truncate();
+        })
+        it('should return 201 ok', function() {
+            return request(server)
+                .post('/api/auth/register')
+                .send({ username: 'TestRegister', password: 'testing', type: 'admin'})
+                .then(res=>{
+                    expect(res.status).toBe(201);
+                    expect(res.body.username).toEqual('TestRegister')
+                })
+        })
+    })
 })
