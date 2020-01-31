@@ -13,7 +13,7 @@ configMiddleware(server);
 
 server.use('/api/auth', authRouter);
 server.use('/api/users', verifyToken, verifySession, usersRouter);
-server.use('/api/jokes', verifyToken, verifySession, jokesRouter);
+server.use('/api/jokes', verifyToken, jokesRouter);
 
 server.get('/', (req, res) => {
     res.send("It's alive!");
