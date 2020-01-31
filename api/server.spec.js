@@ -63,11 +63,8 @@ describe('server', function() {
         })
     })
     let cookies;
-
+    let token;
     describe('POST /api/auth/login', function() {
-        // beforeEach(async () => {
-        //     await db('users').truncate();
-        // })
         it('should return 201 ok', function() {
             return request(server)
                 .post('/api/auth/login')
@@ -83,11 +80,38 @@ describe('server', function() {
                 .then(res=>{
                     expect(res.body.username).toEqual('TestRegister')
                     expect(res.body.token).toBeDefined()
+                    token = res.body.token
                     expect(res.headers).toHaveProperty("set-cookie");
                     cookies = res.headers["set-cookie"].pop().split(";")[0];
-                    console.log('cookies:',cookies)
-                    // console.log(res.headers)
+                    console.log('cookies:', cookies)
+                    console.log('token:', token)
                 })
         })
     })
+    describe('GET /api/users', function() {
+        it('should return list of users', function() {
+            return request(server)
+                .get('/api/users')
+                .set('Authorization', token)
+                .set('Cookie', [cookies])
+                .then(res=>{
+                    expect(res.status).toBe(200);
+                    expect(res.body).toBeDefined()
+                    console.log('should return list of users:', res.body)
+                })
+        })
+    })
+    describe('GET /api/jokes', function() {
+        it('should return 200 and list of jokes', function() {
+            return request(server)
+                .get('/api/jokes')
+                .set('Authorization', token)
+                .set('Cookie', [cookies])
+                .then(res=>{
+                    expect(res.status).toBe(200);
+                    expect(res.body).toBeDefined()
+                    // console.log(res.body)
+                })
+        })
+    })        
 })
