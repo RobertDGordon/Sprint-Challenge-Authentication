@@ -48,4 +48,14 @@ router.post('/login', (req, res) => {
     });
 });
 
+router.get('/logout', verifySession, (req, res, next) => {
+  req.session.destroy((err) => {
+      if (err) {
+          next(err)
+      } else {
+          res.json( { message: 'User successfully logged out'} )
+      }
+  })
+})
+
 module.exports = router;
